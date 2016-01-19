@@ -21,6 +21,8 @@ namespace Graphics {
         inline int getHeight() { return m_height; }
 
         static bool isKeyPressed(unsigned int key);
+        static bool isMouseButtonPressed(unsigned int button);
+
     private:
         const char *m_title;
         int m_width, m_height;
@@ -32,6 +34,8 @@ namespace Graphics {
         bool init();
         friend void key_callback(GLFWwindow* window, int key,
                                  int scancode, int action, int mods);
+        friend void mouse_button_callback(GLFWwindow* window, int button,
+                                 int action, int mods);
     };
 
 }}

@@ -7,8 +7,10 @@ namespace Graphics {
     bool Window::m_keys[MAX_KEYS];
     bool Window::m_mouse_buttons[MAX_BUTTONS];
     void window_resize(GLFWwindow *window, int width, int height);
-    void key_callback(GLFWwindow* window,
-            int key, int scancode, int action, int mods);
+    void key_callback(GLFWwindow* window, int key, int scancode,
+                      int action, int mods);
+    void mouse_button_callback(GLFWwindow* window, int button,
+                               int action, int mods);
 
     // CONSTRUCTOR
     Window::Window(const char* title, int width, int height) :
@@ -40,6 +42,7 @@ namespace Graphics {
         glfwSetWindowUserPointer(m_window, this);
         glfwSetWindowSizeCallback(m_window, window_resize);
         glfwSetKeyCallback(m_window, key_callback);
+        glfwSetMouseButtonCallback(m_window, mouse_button_callback);
 
         std::cout << glGetString(GL_VERSION) << std::endl;
         printf("Supported GLSL version is %s.\n",
@@ -72,10 +75,20 @@ namespace Graphics {
         win->m_keys[key] = action != GLFW_RELEASE;
     }
 
+    void mouse_button_callback(GLFWwindow* window, int button,
+                               int action, int mods) {
+        Window *win = (Window*) glfwGetWindowUserPointer(window);
+        win->m_mouse_buttons[button] = action != GLFW_RELEASE;
+    }
+
     bool Window::isKeyPressed(unsigned int key) {
         // TODO: Log This!
         if (key >= MAX_KEYS) return false;
         return m_keys[key];
     }
 
+    bool Window::isMouseButtonPressed(unsigned int button) {
+        if (button >= MAX_BUTTONS) return false;
+        return m_mouse_buttons[button];
+    }
 } }
