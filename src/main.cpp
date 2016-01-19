@@ -11,14 +11,11 @@ int main(int argc, char *argv[])
 {
     Sparky::Graphics::Window w("Game", 640, 480);
 
-    while(!glfwWindowShouldClose(w.getGLFWwindow())) {
-        glfwSwapBuffers(w.getGLFWwindow());
-        glfwPollEvents();
+    while(!w.closed()) {
+        w.update();
     }
 
     glfwTerminate();
-
-    LOG("foobar")
 
     return 0;
 }

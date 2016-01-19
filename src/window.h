@@ -11,14 +11,14 @@ namespace Graphics {
         Window(const char* title, int width, int height);
         ~Window();
         void update() const;
-        GLFWwindow* getGLFWwindow() { return m_window; }
+        bool closed() const;
 
     private:
         const char *m_title;
         int m_width, m_height;
         GLFWwindow* m_window;
 
-        void init();
+        bool init();
     };
 
 }}
