@@ -2,8 +2,8 @@
 CC = g++
 
 # Flags
-CFLAGS = -c -Wall -std=c++1y
-LDLFLAGS =
+CFLAGS = -c -Wall -std=c++1y -D DEBUG
+LDLFLAGS = -lglfw3
 
 # Directories
 SRCDIR = src
