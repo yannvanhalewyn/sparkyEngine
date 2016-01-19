@@ -20,17 +20,17 @@ namespace Graphics {
         inline int getWidth() { return m_width; }
         inline int getHeight() { return m_height; }
 
-        static bool isKeyPressed(unsigned int key);
-        static bool isMouseButtonPressed(unsigned int button);
-        void getMousePosition(double &x, double &y);
+        bool isKeyPressed(unsigned int key) const;
+        bool isMouseButtonPressed(unsigned int button) const;
+        void getMousePosition(double &x, double &y) const;
 
     private:
         const char *m_title;
         int m_width, m_height;
         GLFWwindow* m_window;
-        static bool m_keys[MAX_KEYS];
-        static bool m_mouse_buttons[MAX_BUTTONS];
-        static double m_mousex, m_mousey;
+        bool m_keys[MAX_KEYS];
+        bool m_mouse_buttons[MAX_BUTTONS];
+        double m_mousex, m_mousey;
 
         bool init();
         friend void key_callback(GLFWwindow* window, int key,

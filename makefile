@@ -2,7 +2,7 @@
 CC = g++
 
 # Flags
-CFLAGS = -c -Wall -std=c++1y -D DEBUG -D GLFW_INCLUDE_GLCOREARB
+CFLAGS = -c -Wall -std=c++14 -D DEBUG -D GLFW_INCLUDE_GLCOREARB
 LDLFLAGS = -lglfw3 -framework OpenGL
 
 # Directories

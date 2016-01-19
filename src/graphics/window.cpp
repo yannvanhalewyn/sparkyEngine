@@ -5,9 +5,6 @@ namespace Sparky {
 namespace Graphics {
 
     // Pre definitions (statics)
-    bool Window::m_keys[MAX_KEYS];
-    bool Window::m_mouse_buttons[MAX_BUTTONS];
-    double Window::m_mousex, Window::m_mousey;
     void window_resize(GLFWwindow *window, int width, int height);
     void key_callback(GLFWwindow* window, int key, int scancode,
                       int action, int mods);
@@ -91,18 +88,18 @@ namespace Graphics {
         win->m_mousey = y;
     }
 
-    bool Window::isKeyPressed(unsigned int key) {
+    bool Window::isKeyPressed(unsigned int key) const {
         // TODO: Log This!
         if (key >= MAX_KEYS) return false;
         return m_keys[key];
     }
 
-    bool Window::isMouseButtonPressed(unsigned int button) {
+    bool Window::isMouseButtonPressed(unsigned int button) const {
         if (button >= MAX_BUTTONS) return false;
         return m_mouse_buttons[button];
     }
 
-    void Window::getMousePosition(double &x, double &y) {
+    void Window::getMousePosition(double &x, double &y) const {
         x = m_mousex;
         y = m_mousey;
     }
