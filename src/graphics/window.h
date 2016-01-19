@@ -10,6 +10,7 @@ namespace Graphics {
     public:
         Window(const char* title, int width, int height);
         ~Window();
+        void clear() const;
         void update() const;
         bool closed() const;
 

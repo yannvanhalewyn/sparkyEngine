@@ -35,13 +35,17 @@ namespace Graphics {
         return true;
     }
 
+    void Window::clear() const {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
+
     void Window::update() const {
+        glfwSwapBuffers(m_window);
         glfwPollEvents();
     }
 
     bool Window::closed() const {
         return glfwWindowShouldClose(m_window);
     }
-
 
 } }

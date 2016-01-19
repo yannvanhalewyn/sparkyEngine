@@ -3,7 +3,7 @@ CC = g++
 
 # Flags
 CFLAGS = -c -Wall -std=c++1y -D DEBUG
-LDLFLAGS = -lglfw3
+LDLFLAGS = -lglfw3 -framework OpenGL
 
 # Directories
 SRCDIR = src
