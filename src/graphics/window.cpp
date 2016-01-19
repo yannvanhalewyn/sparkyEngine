@@ -4,7 +4,11 @@
 namespace Sparky {
 namespace Graphics {
 
-    void windowResize(GLFWwindow *window, int width, int height);
+    bool Window::m_keys[MAX_KEYS];
+    bool Window::m_mouse_buttons[MAX_BUTTONS];
+    void window_resize(GLFWwindow *window, int width, int height);
+    void key_callback(GLFWwindow* window,
+            int key, int scancode, int action, int mods);
 
     // CONSTRUCTOR
     Window::Window(const char* title, int width, int height) :
@@ -33,9 +37,13 @@ namespace Graphics {
         }
 
         glfwMakeContextCurrent(m_window);
-        glfwSetWindowSizeCallback(m_window, windowResize);
+        glfwSetWindowUserPointer(m_window, this);
+        glfwSetWindowSizeCallback(m_window, window_resize);
+        glfwSetKeyCallback(m_window, key_callback);
 
         std::cout << glGetString(GL_VERSION) << std::endl;
+        printf("Supported GLSL version is %s.\n",
+                (char *) glGetString(GL_SHADING_LANGUAGE_VERSION));
 
         return true;
     }
@@ -53,9 +61,21 @@ namespace Graphics {
         return glfwWindowShouldClose(m_window);
     }
 
-    void windowResize(GLFWwindow *window, int width, int height) {
+    void window_resize(GLFWwindow *window, int width, int height) {
         // Not necessary for mac
         glViewport(0, 0, width, height);
+    }
+
+    void key_callback(GLFWwindow* window, int key,
+                      int scancode, int action, int mods) {
+        Window *win = (Window*) glfwGetWindowUserPointer(window);
+        win->m_keys[key] = action != GLFW_RELEASE;
+    }
+
+    bool Window::isKeyPressed(unsigned int key) {
+        // TODO: Log This!
+        if (key >= MAX_KEYS) return false;
+        return m_keys[key];
     }
 
 } }
