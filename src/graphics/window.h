@@ -22,6 +22,7 @@ namespace Graphics {
 
         static bool isKeyPressed(unsigned int key);
         static bool isMouseButtonPressed(unsigned int button);
+        void getMousePosition(double &x, double &y);
 
     private:
         const char *m_title;
@@ -36,6 +37,8 @@ namespace Graphics {
                                  int scancode, int action, int mods);
         friend void mouse_button_callback(GLFWwindow* window, int button,
                                  int action, int mods);
+        friend void cursor_position_callback(GLFWwindow* window,
+                                 double x, double y);
     };
 
 }}

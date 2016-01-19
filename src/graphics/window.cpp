@@ -4,13 +4,16 @@
 namespace Sparky {
 namespace Graphics {
 
+    // Pre definitions (statics)
     bool Window::m_keys[MAX_KEYS];
     bool Window::m_mouse_buttons[MAX_BUTTONS];
+    double Window::m_mousex, Window::m_mousey;
     void window_resize(GLFWwindow *window, int width, int height);
     void key_callback(GLFWwindow* window, int key, int scancode,
                       int action, int mods);
     void mouse_button_callback(GLFWwindow* window, int button,
                                int action, int mods);
+    void cursor_position_callback(GLFWwindow* window, double x, double y);
 
     // CONSTRUCTOR
     Window::Window(const char* title, int width, int height) :
@@ -43,6 +46,7 @@ namespace Graphics {
         glfwSetWindowSizeCallback(m_window, window_resize);
         glfwSetKeyCallback(m_window, key_callback);
         glfwSetMouseButtonCallback(m_window, mouse_button_callback);
+        glfwSetCursorPosCallback(m_window, cursor_position_callback);
 
         std::cout << glGetString(GL_VERSION) << std::endl;
         printf("Supported GLSL version is %s.\n",
@@ -81,6 +85,12 @@ namespace Graphics {
         win->m_mouse_buttons[button] = action != GLFW_RELEASE;
     }
 
+    void cursor_position_callback(GLFWwindow* window, double x, double y) {
+        Window *win = (Window*) glfwGetWindowUserPointer(window);
+        win->m_mousex = x;
+        win->m_mousey = y;
+    }
+
     bool Window::isKeyPressed(unsigned int key) {
         // TODO: Log This!
         if (key >= MAX_KEYS) return false;
@@ -90,5 +100,10 @@ namespace Graphics {
     bool Window::isMouseButtonPressed(unsigned int button) {
         if (button >= MAX_BUTTONS) return false;
         return m_mouse_buttons[button];
+    }
+
+    void Window::getMousePosition(double &x, double &y) {
+        x = m_mousex;
+        y = m_mousey;
     }
 } }
