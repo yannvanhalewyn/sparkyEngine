@@ -35,6 +35,8 @@ namespace Graphics {
         glfwMakeContextCurrent(m_window);
         glfwSetWindowSizeCallback(m_window, windowResize);
 
+        std::cout << glGetString(GL_VERSION) << std::endl;
+
         return true;
     }
 
