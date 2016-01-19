@@ -11,7 +11,7 @@ OBJDIR = obj
 BINDIR = bin
 
 # Executables
-APP_NAME = main
+APP_NAME = engineTest
 EXEC := $(addprefix $(BINDIR)/, $(APP_NAME))
 
 # Package

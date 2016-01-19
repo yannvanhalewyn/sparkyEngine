@@ -11,8 +11,11 @@ namespace Graphics {
         Window(const char* title, int width, int height);
         ~Window();
         void clear() const;
-        void update() const;
+        void update();
         bool closed() const;
+
+        inline int getWidth() { return m_width; }
+        inline int getHeight() { return m_height; }
 
     private:
         const char *m_title;

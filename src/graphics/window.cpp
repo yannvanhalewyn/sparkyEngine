@@ -4,6 +4,8 @@
 namespace Sparky {
 namespace Graphics {
 
+    void windowResize(GLFWwindow *window, int width, int height);
+
     // CONSTRUCTOR
     Window::Window(const char* title, int width, int height) :
     m_title(title), m_width(width), m_height(height)
@@ -31,6 +33,7 @@ namespace Graphics {
         }
 
         glfwMakeContextCurrent(m_window);
+        glfwSetWindowSizeCallback(m_window, windowResize);
 
         return true;
     }
@@ -39,13 +42,18 @@ namespace Graphics {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    void Window::update() const {
+    void Window::update() {
         glfwSwapBuffers(m_window);
         glfwPollEvents();
     }
 
     bool Window::closed() const {
         return glfwWindowShouldClose(m_window);
+    }
+
+    void windowResize(GLFWwindow *window, int width, int height) {
+        // Not necessary for mac
+        glViewport(0, 0, width, height);
     }
 
 } }
